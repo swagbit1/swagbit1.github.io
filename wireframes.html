@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GB_ Portfolio — Wireframe Directions</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; font-family: 'Caveat', cursive; }
+
+  /* Wireframe base styles */
+  .wf { background: #0e0e0e; color: #d4cfc4; border: 1.5px solid #333; border-radius: 4px; font-family: 'Caveat', cursive; position: relative; overflow: hidden; }
+  .wf * { box-sizing: border-box; }
+
+  /* Sketch elements */
+  .box { border: 1.5px solid #555; border-radius: 2px; background: #1a1a1a; }
+  .box.amber { border-color: #c8791a; }
+  .box.gold { border-color: #f0b429; }
+  .box.pink { border-color: #ff6b9d; }
+  .box.teal { border-color: #4ecdc4; }
+  .box.fill-amber { background: rgba(200,121,26,0.25); border-color: #c8791a; }
+  .box.fill-dark { background: #1a1a1a; }
+  .box.fill-glass { background: rgba(200,230,255,0.04); border-color: #4ecdc4; border-style: dashed; }
+
+  .label { font-family: 'Space Mono', monospace; font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+  .label.amber { color: #c8791a; }
+  .label.gold { color: #f0b429; }
+  .label.pink { color: #ff6b9d; }
+  .label.teal { color: #4ecdc4; }
+
+  .h1 { font-size: 22px; font-weight: 600; color: #f0b429; line-height: 1.1; }
+  .h2 { font-size: 16px; font-weight: 600; color: #c8791a; }
+  .h3 { font-size: 13px; font-weight: 600; color: #e8dcc8; }
+  .body { font-size: 12px; color: #888; line-height: 1.4; }
+  .mono { font-family: 'Space Mono', monospace; }
+
+  .pill { display: inline-block; border: 1px solid #c8791a; border-radius: 20px; padding: 1px 7px; font-size: 9px; color: #c8791a; font-family: 'Space Mono', monospace; margin: 1px; }
+  .pill.teal { border-color: #4ecdc4; color: #4ecdc4; }
+  .pill.pink { border-color: #ff6b9d; color: #ff6b9d; }
+
+  .btn { display: inline-block; border: 1.5px solid #c8791a; border-radius: 3px; padding: 4px 12px; font-size: 11px; color: #c8791a; font-family: 'Space Mono', monospace; text-align: center; }
+  .btn.fill { background: rgba(200,121,26,0.3); }
+  .btn.outline { border-color: #555; color: #888; }
+  .btn.sm { padding: 2px 8px; font-size: 9px; }
+
+  .divider { border: none; border-top: 1px dashed #333; margin: 6px 0; }
+
+  /* Stars sketch */
+  .stars-bg { position: absolute; inset: 0; }
+
+  /* Annotation */
+  .annotation { position: absolute; font-size: 10px; color: #ff6b9d; font-family: 'Space Mono', monospace; }
+  .annotation::before { content: '← '; }
+  .annotation.right::before { content: ''; }
+  .annotation.right::after { content: ' →'; }
+
+  /* Section marker */
+  .sec-mark { font-family: 'Space Mono', monospace; font-size: 9px; color: #444; letter-spacing: 0.1em; }
+
+  /* Sketch hatching */
+  .hatch { background-image: repeating-linear-gradient(45deg, #222 0, #222 1px, transparent 0, transparent 50%); background-size: 6px 6px; }
+
+  .tag { font-family: 'Space Mono', monospace; font-size: 8px; background: #1a1a1a; border: 1px solid #333; border-radius: 2px; padding: 1px 4px; color: #666; display: inline-block; margin: 1px; }
+
+  /* Direction badge */
+  .dir-badge { position: absolute; top: 10px; left: 10px; background: #c8791a; color: #000; font-family: 'Space Mono', monospace; font-size: 9px; padding: 2px 8px; border-radius: 2px; font-weight: 700; letter-spacing: 0.1em; z-index: 10; }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #c8791a; display: inline-block; }
+  .dot.teal { background: #4ecdc4; }
+  .dot.pink { background: #ff6b9d; }
+
+  /* Scroll indicator */
+  .scroll-hint { font-size: 9px; color: #444; font-family: 'Space Mono', monospace; text-align: center; padding: 4px; }
+
+  /* canvas title */
+  .canvas-intro { padding: 24px 32px 0; }
+  .canvas-intro h1 { font-family: 'Space Mono', monospace; font-size: 14px; color: #f0b429; letter-spacing: 0.15em; }
+  .canvas-intro p { font-family: 'Space Mono', monospace; font-size: 10px; color: #666; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState } = React;
+
+/* ─── Reusable sketch atoms ─── */
+const Stars = ({ n = 30 }) => {
+  const pts = React.useMemo(() => Array.from({length: n}, (_, i) => ({
+    x: (i * 137.5 % 100),
+    y: (i * 73.1 % 100),
+    r: i % 3 === 0 ? 1.5 : 0.8,
+    o: 0.2 + (i % 5) * 0.1,
+  })), [n]);
+  return (
+    <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none'}}>
+      {pts.map((p,i) => <circle key={i} cx={`${p.x}%`} cy={`${p.y}%`} r={p.r} fill="white" opacity={p.o}/>)}
+    </svg>
+  );
+};
+
+const PetrovaArc = () => (
+  <svg style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',opacity:0.15}}>
+    <path d="M -50 120 Q 200 20 450 80 Q 700 140 950 40" stroke="#ff6b9d" strokeWidth="40" fill="none" opacity="0.4"/>
+  </svg>
+);
+
+const TimelineNode = ({title, sub, date, tags=[], last=false}) => (
+  <div style={{display:'flex', gap:10, marginBottom: last?0:18}}>
+    <div style={{display:'flex', flexDirection:'column', alignItems:'center', flexShrink:0}}>
+      <div style={{width:10, height:10, borderRadius:'50%', border:'2px solid #c8791a', background:'#0e0e0e', flexShrink:0}}/>
+      {!last && <div style={{width:1, flex:1, background:'#c8791a', opacity:0.4, marginTop:2}}/>}
+    </div>
+    <div style={{paddingBottom: last?0:4}}>
+      <div className="h3" style={{fontSize:12}}>{title}</div>
+      <div className="label amber" style={{fontSize:8, marginBottom:2}}>{sub} · {date}</div>
+      <div style={{fontSize:10, color:'#666', lineHeight:1.4}}>{tags.join(' · ')}</div>
+    </div>
+  </div>
+);
+
+/* ══════════════════════════════════════════════════════════
+   DIRECTION A — "MISSION CONTROL"
+   Classic scroll: hero → radial quadrant → projects → timeline
+   Dense info, military dashboard feel
+══════════════════════════════════════════════════════════ */
+const DirectionA = () => (
+  <div className="wf" style={{width:420, fontSize:12}}>
+    <div className="dir-badge">A · MISSION CONTROL</div>
+
+    {/* HEADER */}
+    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'28px 14px 8px', borderBottom:'1px solid #222'}}>
+      <div className="mono" style={{color:'#f0b429', fontWeight:700, fontSize:14}}>GB_</div>
+      <div style={{display:'flex', gap:10}}>
+        {['PROJECTS','SKILLS','LOG','CONTACT'].map(l=><div key={l} className="label" style={{fontSize:8}}>{l}</div>)}
+      </div>
+      <div className="btn sm fill">TRANSMIT ▶</div>
+    </div>
+
+    {/* HERO — starfield + centered */}
+    <div style={{position:'relative', background:'#050508', padding:'18px 14px', textAlign:'center', borderBottom:'1px solid #1a1a1a'}}>
+      <Stars n={60}/>
+      {/* Image placeholder */}
+      <div className="box amber hatch" style={{width:80, height:90, margin:'0 auto 10px', display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <div className="label amber" style={{fontSize:7, textAlign:'center'}}>ROCKY<br/>IMG</div>
+      </div>
+      <div className="h1" style={{fontSize:18}}>GAGAN BHATTARAI</div>
+      <div className="label teal" style={{marginTop:4, fontSize:9}}>CS @ McMaster · Full-Stack · AI · Embedded</div>
+      <div style={{display:'flex', gap:8, justifyContent:'center', marginTop:10}}>
+        <div className="btn sm fill">▶ VIEW PROJECTS</div>
+        <div className="btn sm outline">github ↗</div>
+      </div>
+      <div style={{color:'#c8791a', fontSize:14, marginTop:8, opacity:0.6}}>↓</div>
+    </div>
+
+    {/* QUADRANT SECTION */}
+    <div style={{position:'relative', background:'#080808', padding:'10px 10px'}}>
+      <div className="label" style={{textAlign:'center', marginBottom:8, fontSize:8}}>// ROCKY QUADRANT</div>
+      <div style={{display:'grid', gridTemplateColumns:'1fr 60px 1fr', gridTemplateRows:'1fr 60px 1fr', gap:4, alignItems:'center'}}>
+        {/* TL */}
+        <div className="box fill-glass" style={{padding:'6px 8px'}}>
+          <div className="label amber" style={{fontSize:7, marginBottom:3}}>SKILLS</div>
+          <div><span className="pill">Python</span><span className="pill">TS</span><span className="pill">React</span><span className="pill">C++</span></div>
+        </div>
+        {/* top spacer */}
+        <div/>
+        {/* TR */}
+        <div className="box fill-glass" style={{padding:'6px 8px'}}>
+          <div className="label amber" style={{fontSize:7, marginBottom:2}}>EDUCATION</div>
+          <div className="body" style={{fontSize:9}}>McMaster BASc CS<br/>Minor Math · 2028</div>
+        </div>
+        {/* left spacer */}
+        <div/>
+        {/* CENTER — rocky */}
+        <div className="box amber hatch" style={{width:60, height:60, display:'flex', alignItems:'center', justifyContent:'center'}}>
+          <div className="label amber" style={{fontSize:7, textAlign:'center'}}>ROCKY<br/>PTR</div>
+        </div>
+        {/* right spacer */}
+        <div/>
+        {/* BL */}
+        <div className="box fill-glass" style={{padding:'6px 8px'}}>
+          <div className="label amber" style={{fontSize:7, marginBottom:2}}>ABOUT</div>
+          <div className="body" style={{fontSize:9}}>Year 3 CS. Tutor. Team lead. Habitual over-engineer.</div>
+        </div>
+        <div/>
+        {/* BR */}
+        <div className="box fill-glass" style={{padding:'6px 8px'}}>
+          <div className="label amber" style={{fontSize:7, marginBottom:2}}>STACK</div>
+          <div><span className="tag">Next.js</span><span className="tag">Docker</span><span className="tag">TF.js</span></div>
+        </div>
+      </div>
+    </div>
+
+    {/* PROJECTS */}
+    <div style={{padding:'10px', background:'#060606', borderTop:'1px solid #1a1a1a'}}>
+      <div className="label amber" style={{marginBottom:6, fontSize:8}}>01 // TRANSMITTED WORKS</div>
+      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:6}}>
+        {[
+          {n:'project_01', t:'Thru.ai', sub:'AI Drive-Thru', tags:['React','Node','TF.js']},
+          {n:'project_02', t:'Big City', sub:'Location Discovery', tags:['Next.js','Convex','Gemini']},
+        ].map(p=>(
+          <div key={p.n} className="box fill-glass" style={{padding:'7px 8px'}}>
+            <div className="label" style={{fontSize:7, marginBottom:2}}>{p.n}</div>
+            <div className="h3" style={{fontSize:11}}>{p.t}</div>
+            <div className="body" style={{fontSize:9, marginBottom:4}}>{p.sub}</div>
+            <div>{p.tags.map(t=><span key={t} className="pill" style={{fontSize:7}}>{t}</span>)}</div>
+            <div style={{marginTop:5, display:'flex', gap:4}}>
+              <div className="btn sm">github↗</div><div className="btn sm">devpost↗</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* DOME */}
+    <div style={{background:'#050508', padding:'8px 10px', borderTop:'1px solid #1a1a1a', textAlign:'center'}}>
+      <div className="label teal" style={{fontSize:8}}>// TOUCH THE DOME</div>
+      <div className="box teal" style={{margin:'5px auto', width:'90%', height:40, display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <div className="body" style={{fontSize:9}}>interactive voronoi canvas · cursor: crosshair</div>
+      </div>
+    </div>
+
+    {/* SKILLS / PETROVA */}
+    <div style={{position:'relative', background:'#060606', padding:'8px 10px', borderTop:'1px solid #1a1a1a', overflow:'hidden'}}>
+      <PetrovaArc/>
+      <div className="label pink" style={{fontSize:8, marginBottom:5}}>02 // ASTROPHAGE DETECTED</div>
+      {[
+        {cat:'LANGUAGES', items:['Python','TS','JS','C++','Java']},
+        {cat:'WEB', items:['React','Next.js','Node.js','Socket.IO']},
+        {cat:'AI/ML', items:['TF.js','sklearn','Gemini API']},
+      ].map(row=>(
+        <div key={row.cat} style={{marginBottom:4, display:'flex', alignItems:'flex-start', gap:6}}>
+          <div className="label" style={{width:58, flexShrink:0, fontSize:7, paddingTop:2}}>{row.cat}</div>
+          <div>{row.items.map(i=><span key={i} className="pill">{i}</span>)}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* TIMELINE */}
+    <div style={{padding:'8px 10px', background:'#060606', borderTop:'1px solid #1a1a1a'}}>
+      <div className="label amber" style={{marginBottom:6, fontSize:8}}>03 // MISSION LOG</div>
+      <TimelineNode title="Math/CS Tutor" sub="Columbia Intl College" date="2025–Now" tags={['100+ students','Calc','Data Mgmt']}/>
+      <TimelineNode title="Project Lead" sub="2nd Nature / Ripen Labs" date="2025" tags={['+30% reach','5-person team']}/>
+      <TimelineNode title="Software Dev" sub="McMaster Sumobots" date="2024–25" tags={['C++','PID','I2C','Arduino']} last/>
+    </div>
+
+    {/* CONTACT */}
+    <div style={{padding:'10px', background:'#050508', borderTop:'1px solid #1a1a1a', textAlign:'center'}}>
+      <div className="h2" style={{fontSize:14, marginBottom:4}}>TRANSMIT A SIGNAL</div>
+      <div className="body" style={{fontSize:9, marginBottom:8, fontStyle:'italic'}}>"Rocky and Grace figured out how to communicate across species."</div>
+      <div style={{display:'flex', gap:6, justifyContent:'center', flexWrap:'wrap'}}>
+        <div className="btn sm fill">✉ Email</div>
+        <div className="btn sm">⌥ GitHub</div>
+        <div className="btn sm">↗ LinkedIn</div>
+        <div className="btn sm">☎ Phone</div>
+      </div>
+      <div className="label" style={{marginTop:8, fontSize:7}}>// gagan bhattarai · 2026 · hamilton ON</div>
+    </div>
+
+    <div className="scroll-hint">↑ full scroll · all sections vertical ↑</div>
+  </div>
+);
+
+/* ══════════════════════════════════════════════════════════
+   DIRECTION B — "DEEP SPACE CINEMA"
+   Dramatic full-bleed sections, big type, cinematic spacing
+   Less dense, more visual impact — "poster energy"
+══════════════════════════════════════════════════════════ */
+const DirectionB = () => (
+  <div className="wf" style={{width:420, fontSize:12}}>
+    <div className="dir-badge">B · DEEP SPACE CINEMA</div>
+
+    {/* HEADER — minimal */}
+    <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'28px 16px 8px'}}>
+      <div className="mono" style={{color:'#f0b429', fontWeight:700, fontSize:16, letterSpacing:'0.15em'}}>GB_</div>
+      <div className="btn sm fill" style={{fontSize:10}}>TRANSMIT SIGNAL</div>
+    </div>
+
+    {/* HERO — huge type, Rocky right-aligned */}
+    <div style={{position:'relative', background:'#050508', minHeight:160, padding:'16px', borderBottom:'1px solid #111', display:'flex', alignItems:'flex-end', gap:12, overflow:'hidden'}}>
+      <Stars n={80}/>
+      {/* Big radial glow */}
+      <div style={{position:'absolute', right:60, top:10, width:100, height:100, borderRadius:'50%', background:'radial-gradient(circle, rgba(200,121,26,0.12) 0%, transparent 70%)', pointerEvents:'none'}}/>
+      <div style={{flex:1, zIndex:1}}>
+        <div style={{fontFamily:'Space Mono', fontSize:8, color:'#c8791a', letterSpacing:'0.2em', marginBottom:6}}>YEAR 3 · CS · McMASTER</div>
+        <div className="h1" style={{fontSize:28, lineHeight:1, marginBottom:8}}>GAGAN<br/>BHATTARAI</div>
+        <div style={{height:1, width:40, background:'#c8791a', marginBottom:8}}/>
+        <div className="label teal" style={{fontSize:9, marginBottom:10}}>Full-Stack · AI · Embedded</div>
+        <div style={{display:'flex', gap:6}}>
+          <div className="btn sm fill">▶ PROJECTS</div>
+          <div className="btn sm outline">github ↗</div>
+        </div>
+      </div>
+      {/* Rocky — big, right side */}
+      <div className="box amber hatch" style={{width:90, height:120, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center', zIndex:1}}>
+        <div className="label amber" style={{fontSize:7, textAlign:'center'}}>ROCKY<br/>420px<br/>image</div>
+      </div>
+    </div>
+
+    {/* QUADRANT — full bleed, rocky centered, huge */}
+    <div style={{background:'#050508', padding:'10px', borderBottom:'1px solid #111', position:'relative', overflow:'hidden'}}>
+      <div style={{position:'absolute', inset:0, background:'radial-gradient(circle at 50% 50%, rgba(255,107,157,0.04) 0%, transparent 70%)'}}/>
+      <div style={{textAlign:'center', marginBottom:6}}>
+        <div className="label" style={{fontSize:7}}>// AROUND ROCKY</div>
+      </div>
+      <div style={{display:'flex', gap:6, marginBottom:6}}>
+        <div className="box fill-glass" style={{flex:1, padding:'6px'}}>
+          <div className="label amber" style={{fontSize:7}}>SKILLS</div>
+          <div style={{marginTop:3}}><span className="pill" style={{fontSize:7}}>Python</span><span className="pill" style={{fontSize:7}}>TS</span><span className="pill" style={{fontSize:7}}>React</span></div>
+        </div>
+        <div className="box fill-glass" style={{flex:1, padding:'6px'}}>
+          <div className="label amber" style={{fontSize:7}}>EDUCATION</div>
+          <div className="body" style={{fontSize:8, marginTop:2}}>McMaster CS · 2028</div>
+        </div>
+      </div>
+      {/* center rocky */}
+      <div className="box amber hatch" style={{width:70, height:70, margin:'0 auto 6px', display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <div className="label amber" style={{fontSize:7, textAlign:'center'}}>ROCKY<br/>PTR</div>
+      </div>
+      <div style={{display:'flex', gap:6}}>
+        <div className="box fill-glass" style={{flex:1, padding:'6px'}}>
+          <div className="label amber" style={{fontSize:7}}>ABOUT</div>
+          <div className="body" style={{fontSize:8, marginTop:2}}>Over-engineer. Tutor. Team lead.</div>
+        </div>
+        <div className="box fill-glass" style={{flex:1, padding:'6px'}}>
+          <div className="label amber" style={{fontSize:7}}>STACK</div>
+          <div style={{marginTop:2}}><span className="tag">Docker</span><span className="tag">Arduino</span><span className="tag">TF.js</span></div>
+        </div>
+      </div>
+    </div>
+
+    {/* PROJECTS — large cards, stacked */}
+    <div style={{padding:'10px', background:'#060606', borderBottom:'1px solid #111'}}>
+      <div className="label amber" style={{fontSize:8, marginBottom:8}}>01 // TRANSMITTED WORKS</div>
+      {[
+        {n:'project_01', t:'Thru.ai', sub:'AI-Powered Drive-Thru ordering system', tags:['React','Node.js','TensorFlow.js','ElevenLabs'], award:'🏆 Hackathon'},
+        {n:'project_02', t:'Big City', sub:'Location Discovery Platform at scale', tags:['Next.js','Convex','Gemini API']},
+      ].map((p,i)=>(
+        <div key={p.n} className="box fill-glass" style={{padding:'10px 12px', marginBottom: i===0?6:0}}>
+          <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:4}}>
+            <div>
+              <div className="label" style={{fontSize:7, marginBottom:2}}>{p.n}</div>
+              <div className="h2" style={{fontSize:16}}>{p.t}</div>
+            </div>
+            {p.award && <div style={{fontFamily:'Space Mono', fontSize:8, color:'#f0b429', textAlign:'right'}}>{p.award}</div>}
+          </div>
+          <div className="body" style={{fontSize:9, marginBottom:5}}>{p.sub}</div>
+          <div style={{marginBottom:6}}>{p.tags.map(t=><span key={t} className="pill" style={{fontSize:7}}>{t}</span>)}</div>
+          <div style={{display:'flex', gap:5, borderTop:'1px solid #222', paddingTop:5}}>
+            <div className="btn sm">github ↗</div><div className="btn sm">devpost ↗</div><div className="btn sm fill">demo ▶</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* DOME */}
+    <div style={{background:'#050508', padding:'8px 10px', borderBottom:'1px solid #111', textAlign:'center'}}>
+      <div className="label teal" style={{fontSize:8, marginBottom:4}}>// TOUCH THE DOME</div>
+      <div className="box teal" style={{width:'92%', height:50, margin:'0 auto', display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <div className="body" style={{fontSize:9, color:'#4ecdc4'}}>VORONOI CANVAS — interactive · crosshair cursor</div>
+      </div>
+      <div className="body" style={{fontSize:8, fontStyle:'italic', marginTop:4, color:'#444'}}>Rocky can feel a 0.3mm altitude difference…</div>
+    </div>
+
+    {/* SKILLS — horizontal rows */}
+    <div style={{position:'relative', background:'#060606', padding:'8px 10px', borderBottom:'1px solid #111', overflow:'hidden'}}>
+      <PetrovaArc/>
+      <div className="label pink" style={{fontSize:8, marginBottom:6}}>02 // ASTROPHAGE DETECTED</div>
+      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:4}}>
+        {[
+          {cat:'LANGUAGES', items:['Python','TS','JS','C++']},
+          {cat:'WEB STACK', items:['React','Next.js','Node.js']},
+          {cat:'AI / ML', items:['TF.js','sklearn','Gemini']},
+          {cat:'TOOLS', items:['Docker','Arduino','Git']},
+        ].map(row=>(
+          <div key={row.cat} className="box fill-glass" style={{padding:'5px 7px'}}>
+            <div className="label amber" style={{fontSize:7, marginBottom:3}}>{row.cat}</div>
+            <div>{row.items.map(i=><span key={i} className="pill" style={{fontSize:7}}>{i}</span>)}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{margin:'8px 0 2px', borderTop:'1px solid #1a1a1a', paddingTop:6, fontStyle:'italic', fontSize:9, color:'#666', textAlign:'center'}}>
+        "Astrophage absorbs everything and converts it to energy."
+      </div>
+    </div>
+
+    {/* TIMELINE — wider cards */}
+    <div style={{padding:'8px 10px', background:'#050508', borderBottom:'1px solid #111'}}>
+      <div className="label amber" style={{fontSize:8, marginBottom:8}}>03 // MISSION LOG</div>
+      <TimelineNode title="Math/CS Tutor" sub="Columbia Intl College" date="Sept 2025–Now" tags={['100+ students','Calculus','Data Mgmt']}/>
+      <TimelineNode title="Project Lead" sub="2nd Nature / Ripen Labs" date="2025" tags={['+30% client reach','5-person team']}/>
+      <TimelineNode title="Software Dev" sub="McMaster Sumobots" date="2024–25" tags={['Embedded C++','PID loop','Arduino Nano']} last/>
+    </div>
+
+    {/* CONTACT */}
+    <div style={{padding:'12px 14px', background:'#050508', textAlign:'center'}}>
+      <div className="h1" style={{fontSize:20, marginBottom:4}}>TRANSMIT A SIGNAL</div>
+      <div className="body" style={{fontSize:9, fontStyle:'italic', marginBottom:10, maxWidth:260, margin:'0 auto 10px'}}>
+        "Rocky and Grace figured out how to communicate across species. An email should be easier."
+      </div>
+      <div style={{display:'flex', gap:6, justifyContent:'center', flexWrap:'wrap', marginBottom:10}}>
+        <div className="btn sm fill">✉ Email</div>
+        <div className="btn sm">⌥ GitHub</div>
+        <div className="btn sm">↗ LinkedIn</div>
+        <div className="btn sm">☎ Phone</div>
+      </div>
+      {/* Rocky feeding animation area */}
+      <div style={{position:'absolute', right:14, bottom:30, textAlign:'center'}}>
+        <div className="box pink" style={{width:30, height:30, display:'flex', alignItems:'center', justifyContent:'center'}}>
+          <div style={{fontSize:8, color:'#ff6b9d', fontFamily:'Space Mono'}}>🦑<br/><span style={{fontSize:6}}>hover</span></div>
+        </div>
+      </div>
+      <div className="label" style={{fontSize:7}}>// gagan bhattarai · 2026 · hamilton ON</div>
+    </div>
+
+    <div className="scroll-hint">↑ cinematic · big type · dramatic spacing ↑</div>
+  </div>
+);
+
+/* ══════════════════════════════════════════════════════════
+   DIRECTION C — "TERMINAL LOG"
+   CLI / typewriter aesthetic — everything looks like a command output
+   Monospace-dominant, structured like a shell session
+══════════════════════════════════════════════════════════ */
+const DirectionC = () => (
+  <div className="wf" style={{width:420, fontSize:12, fontFamily:'Space Mono, monospace'}}>
+    <div className="dir-badge">C · TERMINAL LOG</div>
+
+    {/* "Shell" header */}
+    <div style={{padding:'28px 12px 6px', background:'#050508', borderBottom:'1px dashed #222'}}>
+      <div style={{display:'flex', alignItems:'center', gap:6, marginBottom:4}}>
+        <div className="dot"/>
+        <div className="dot teal"/>
+        <div className="dot pink"/>
+        <div style={{flex:1}}/>
+        <div style={{fontSize:8, color:'#444'}}>gb_portfolio.sh · running</div>
+      </div>
+      <div style={{fontSize:9, color:'#555'}}>
+        <span style={{color:'#c8791a'}}>gb@hailmary</span>
+        <span style={{color:'#888'}}>:~$ </span>
+        <span style={{color:'#e8dcc8'}}>./portfolio.sh --year=2026</span>
+      </div>
+    </div>
+
+    {/* "Output" hero */}
+    <div style={{background:'#050508', padding:'10px 12px', position:'relative', overflow:'hidden', borderBottom:'1px dashed #1a1a1a'}}>
+      <Stars n={30}/>
+      <div style={{fontSize:8, color:'#444', marginBottom:2}}>// initializing signal…</div>
+      <div style={{fontSize:20, color:'#f0b429', fontWeight:700, letterSpacing:'0.05em'}}>GAGAN_BHATTARAI</div>
+      <div style={{fontSize:9, color:'#4ecdc4', marginBottom:8}}>
+        <span style={{color:'#c8791a'}}>→ </span>CS @ McMaster · Full-Stack · AI · Embedded
+      </div>
+      <div style={{display:'flex', gap:10, alignItems:'flex-start'}}>
+        <div>
+          <div style={{fontSize:8, color:'#555', marginBottom:2}}>[STATUS]</div>
+          <div style={{fontSize:8, color:'#e8dcc8', lineHeight:1.6}}>
+            Year 3 BASc CS<br/>Hamilton, ON<br/>Expected: Apr 2028
+          </div>
+          <div style={{display:'flex', gap:5, marginTop:8}}>
+            <div className="btn sm fill" style={{fontSize:8}}>▶ PROJECTS</div>
+            <div className="btn sm outline" style={{fontSize:8}}>github↗</div>
+          </div>
+        </div>
+        {/* Rocky as terminal art */}
+        <div className="box amber" style={{flex:1, minHeight:80, padding:'6px', display:'flex', alignItems:'center', justifyContent:'center'}}>
+          <div style={{fontSize:8, color:'#c8791a', textAlign:'center', lineHeight:1.5}}>
+            [rocky_hero.png]<br/>
+            420px · drop-shadow<br/>
+            amber glow
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Quadrant — terminal tables */}
+    <div style={{background:'#060606', padding:'8px 12px', borderBottom:'1px dashed #1a1a1a'}}>
+      <div style={{fontSize:8, color:'#555', marginBottom:5}}>$ cat ./profile.json</div>
+      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:5}}>
+        {[
+          {k:'skills', v:'Python, TS, React, C++, Java'},
+          {k:'education', v:'McMaster BASc · Minor Math'},
+          {k:'about', v:'Tutor. Lead. Over-engineer.'},
+          {k:'stack', v:'Docker, Arduino, TF.js, Next.js'},
+        ].map(({k,v})=>(
+          <div key={k} style={{background:'#0a0a0a', border:'1px solid #1a1a1a', borderRadius:2, padding:'5px 7px'}}>
+            <div style={{color:'#c8791a', fontSize:8}}>&quot;{k}&quot;:</div>
+            <div style={{color:'#e8dcc8', fontSize:8, lineHeight:1.4}}>&quot;{v}&quot;</div>
+          </div>
+        ))}
+      </div>
+      {/* center pointer img */}
+      <div className="box amber hatch" style={{width:50, height:50, margin:'8px auto 0', display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <div className="label amber" style={{fontSize:6, textAlign:'center'}}>ROCKY<br/>ptr</div>
+      </div>
+    </div>
+
+    {/* Projects as commit log */}
+    <div style={{background:'#050508', padding:'8px 12px', borderBottom:'1px dashed #1a1a1a'}}>
+      <div style={{fontSize:8, color:'#555', marginBottom:5}}>$ git log --projects --oneline</div>
+      {[
+        {hash:'a3f9c2b', t:'Thru.ai', date:'2025-01', tags:['React','TF.js','ElevenLabs']},
+        {hash:'7e1d4a0', t:'Big City', date:'2025-02', tags:['Next.js','Gemini','Convex']},
+      ].map(p=>(
+        <div key={p.hash} className="box" style={{marginBottom:5, padding:'7px 9px'}}>
+          <div style={{display:'flex', gap:6, alignItems:'baseline', marginBottom:2}}>
+            <span style={{color:'#f0b429', fontSize:8}}>{p.hash}</span>
+            <span style={{color:'#e8dcc8', fontSize:10, fontFamily:'Caveat'}}>{p.t}</span>
+            <span style={{color:'#444', fontSize:7, marginLeft:'auto'}}>{p.date}</span>
+          </div>
+          <div style={{display:'flex', gap:3, flexWrap:'wrap', marginBottom:4}}>
+            {p.tags.map(t=><span key={t} className="pill" style={{fontSize:7}}>{t}</span>)}
+          </div>
+          <div style={{display:'flex', gap:4}}>
+            <div className="btn sm" style={{fontSize:7}}>github↗</div>
+            <div className="btn sm" style={{fontSize:7}}>devpost↗</div>
+            {p.hash==='a3f9c2b' && <div className="btn sm fill" style={{fontSize:7}}>demo▶</div>}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Dome */}
+    <div style={{background:'#050508', padding:'6px 12px', borderBottom:'1px dashed #1a1a1a', textAlign:'center'}}>
+      <div style={{fontSize:8, color:'#555', marginBottom:3}}>$ ./dome --interactive</div>
+      <div className="box teal" style={{height:36, display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <div style={{fontSize:8, color:'#4ecdc4'}}>VORONOI CANVAS · crosshair · trail decay</div>
+      </div>
+    </div>
+
+    {/* Skills as process output */}
+    <div style={{background:'#060606', padding:'8px 12px', borderBottom:'1px dashed #1a1a1a', position:'relative', overflow:'hidden'}}>
+      <PetrovaArc/>
+      <div style={{fontSize:8, color:'#555', marginBottom:5}}>$ scan --astrophage --skills</div>
+      {[
+        {cat:'LANG', items:['Python','TS','JS','C++','Java','SQL']},
+        {cat:'WEB', items:['React','Next.js','Node','Socket.IO']},
+        {cat:'AI/ML', items:['TF.js','sklearn','NumPy','Gemini']},
+        {cat:'OPS', items:['Git','Docker','Arduino','Linux']},
+      ].map(row=>(
+        <div key={row.cat} style={{display:'flex', gap:6, marginBottom:3, alignItems:'baseline'}}>
+          <span style={{color:'#c8791a', fontSize:8, width:30, flexShrink:0}}>{row.cat}</span>
+          <span style={{color:'#555', fontSize:8, marginRight:3}}>→</span>
+          <div>{row.items.map(i=><span key={i} className="pill" style={{fontSize:7}}>{i}</span>)}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* Timeline as structured output */}
+    <div style={{background:'#050508', padding:'8px 12px', borderBottom:'1px dashed #1a1a1a'}}>
+      <div style={{fontSize:8, color:'#555', marginBottom:5}}>$ tail -n 3 mission_log.txt</div>
+      {[
+        {role:'[TUTOR]', org:'Columbia Intl College', date:'2025–', note:'100+ students · Calc · Data Mgmt'},
+        {role:'[LEAD]', org:'2nd Nature / Ripen Labs', date:'2025', note:'+30% reach · 5-person team'},
+        {role:'[DEV]', org:'McMaster Sumobots', date:'2024–25', note:'Embedded C++ · PID · Arduino'},
+      ].map((e,i)=>(
+        <div key={i} style={{marginBottom:6, paddingLeft:10, borderLeft:'2px solid #1a1a1a', borderLeftColor: i===0?'#c8791a':'#222'}}>
+          <div style={{fontSize:8}}>
+            <span style={{color:'#f0b429'}}>{e.role}</span>
+            <span style={{color:'#666'}}> {e.org} </span>
+            <span style={{color:'#444'}}>{e.date}</span>
+          </div>
+          <div style={{color:'#666', fontSize:8, marginTop:1}}>→ {e.note}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* Contact as ping */}
+    <div style={{background:'#050508', padding:'10px 12px', textAlign:'center'}}>
+      <div style={{fontSize:8, color:'#555', marginBottom:3}}>$ ping gagan --signal</div>
+      <div style={{color:'#f0b429', fontSize:16, marginBottom:6}}>TRANSMIT A SIGNAL</div>
+      <div style={{display:'flex', gap:5, justifyContent:'center', flexWrap:'wrap', marginBottom:8}}>
+        <div className="btn sm fill" style={{fontSize:8}}>✉ Email</div>
+        <div className="btn sm" style={{fontSize:8}}>GitHub</div>
+        <div className="btn sm" style={{fontSize:8}}>LinkedIn</div>
+        <div className="btn sm" style={{fontSize:8}}>Phone</div>
+      </div>
+      <div style={{fontSize:7, color:'#333'}}>// signal from hamilton ON · 2026</div>
+    </div>
+
+    <div className="scroll-hint">↑ terminal · monospace · CLI aesthetic ↑</div>
+  </div>
+);
+
+/* ══════════════════════════════════════════════════════════
+   DIRECTION D — "ORBITAL SPLIT"
+   Left sidebar nav stays fixed; right content scrolls
+   Sidebar shows GB_ + vertical nav + live status
+══════════════════════════════════════════════════════════ */
+const DirectionD = () => (
+  <div className="wf" style={{width:420, fontSize:12, display:'flex', flexDirection:'column'}}>
+    <div className="dir-badge" style={{zIndex:20}}>D · ORBITAL SPLIT</div>
+
+    {/* Fixed sidebar concept */}
+    <div style={{display:'flex', flex:1, minHeight:600}}>
+      {/* LEFT SIDEBAR */}
+      <div style={{width:90, background:'#050508', borderRight:'1px solid #1a1a1a', padding:'28px 8px 8px', display:'flex', flexDirection:'column', flexShrink:0}}>
+        <div style={{fontFamily:'Space Mono', fontSize:14, color:'#f0b429', fontWeight:700, marginBottom:16, textAlign:'center'}}>GB_</div>
+        <div style={{display:'flex', flexDirection:'column', gap:2, flex:1}}>
+          {[
+            {s:'01', l:'PROJECTS'},
+            {s:'02', l:'SKILLS'},
+            {s:'03', l:'LOG'},
+            {s:'', l:'CONTACT'},
+          ].map(({s,l})=>(
+            <div key={l} style={{padding:'5px 4px', borderLeft:'2px solid transparent', cursor:'pointer'}}>
+              {s && <div style={{fontFamily:'Space Mono', fontSize:7, color:'#444'}}>{s}</div>}
+              <div style={{fontFamily:'Space Mono', fontSize:8, color:'#888', letterSpacing:'0.05em'}}>{l}</div>
+            </div>
+          ))}
+        </div>
+        {/* Status */}
+        <div style={{marginTop:'auto', borderTop:'1px solid #1a1a1a', paddingTop:6}}>
+          <div style={{display:'flex', alignItems:'center', gap:3, marginBottom:2}}>
+            <div style={{width:4, height:4, borderRadius:'50%', background:'#4ecdc4'}}/>
+            <div style={{fontFamily:'Space Mono', fontSize:6, color:'#4ecdc4'}}>ONLINE</div>
+          </div>
+          <div style={{fontFamily:'Space Mono', fontSize:6, color:'#444'}}>Hamilton, ON</div>
+        </div>
+      </div>
+
+      {/* RIGHT SCROLL CONTENT */}
+      <div style={{flex:1, overflowY:'auto', background:'#060606'}}>
+        {/* Hero in right panel */}
+        <div style={{position:'relative', background:'#050508', padding:'12px', minHeight:130, overflow:'hidden', borderBottom:'1px solid #111'}}>
+          <Stars n={50}/>
+          <div style={{display:'flex', gap:10, alignItems:'center', height:'100%', minHeight:110}}>
+            <div className="box amber hatch" style={{width:60, height:80, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center'}}>
+              <div className="label amber" style={{fontSize:6, textAlign:'center'}}>ROCKY<br/>hero</div>
+            </div>
+            <div>
+              <div className="h1" style={{fontSize:16, lineHeight:1.1}}>GAGAN<br/>BHATTARAI</div>
+              <div className="label teal" style={{fontSize:8, marginTop:3}}>CS @ McMaster · 2026</div>
+              <div style={{display:'flex', gap:4, marginTop:8}}>
+                <div className="btn sm fill" style={{fontSize:7}}>▶ PROJECTS</div>
+                <div className="btn sm outline" style={{fontSize:7}}>github↗</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Quadrant — 2x2 grid in right pane */}
+        <div style={{padding:'8px', borderBottom:'1px solid #111', background:'#050508'}}>
+          <div style={{display:'flex', gap:4, marginBottom:4}}>
+            <div className="box fill-glass" style={{flex:1, padding:'5px 7px'}}>
+              <div className="label amber" style={{fontSize:7}}>SKILLS</div>
+              <div style={{marginTop:2}}><span className="pill" style={{fontSize:6}}>Python</span><span className="pill" style={{fontSize:6}}>TS</span><span className="pill" style={{fontSize:6}}>C++</span></div>
+            </div>
+            <div className="box fill-glass" style={{flex:1, padding:'5px 7px'}}>
+              <div className="label amber" style={{fontSize:7}}>EDUCATION</div>
+              <div className="body" style={{fontSize:8}}>McMaster CS · 2028</div>
+            </div>
+          </div>
+          {/* Rocky centered */}
+          <div className="box amber hatch" style={{width:50, height:50, margin:'0 auto 4px', display:'flex', alignItems:'center', justifyContent:'center'}}>
+            <div className="label amber" style={{fontSize:6}}>ROCKY<br/>ptr</div>
+          </div>
+          <div style={{display:'flex', gap:4}}>
+            <div className="box fill-glass" style={{flex:1, padding:'5px 7px'}}>
+              <div className="label amber" style={{fontSize:7}}>ABOUT</div>
+              <div className="body" style={{fontSize:8}}>Over-engineer. Tutor.</div>
+            </div>
+            <div className="box fill-glass" style={{flex:1, padding:'5px 7px'}}>
+              <div className="label amber" style={{fontSize:7}}>STACK</div>
+              <div style={{marginTop:1}}><span className="tag">Docker</span><span className="tag">TF.js</span></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Projects */}
+        <div style={{padding:'8px', borderBottom:'1px solid #111', background:'#060606'}}>
+          <div className="label amber" style={{fontSize:7, marginBottom:5}}>01 // TRANSMITTED WORKS</div>
+          {[
+            {t:'Thru.ai', sub:'AI Drive-Thru', tags:['React','TF.js']},
+            {t:'Big City', sub:'Location Discovery', tags:['Next.js','Gemini']},
+          ].map((p,i)=>(
+            <div key={i} className="box fill-glass" style={{padding:'6px 8px', marginBottom:4}}>
+              <div className="h3" style={{fontSize:11}}>{p.t}</div>
+              <div className="body" style={{fontSize:8, marginBottom:3}}>{p.sub}</div>
+              <div style={{marginBottom:3}}>{p.tags.map(t=><span key={t} className="pill" style={{fontSize:6}}>{t}</span>)}</div>
+              <div style={{display:'flex', gap:3}}>
+                <div className="btn sm" style={{fontSize:6}}>github↗</div>
+                <div className="btn sm fill" style={{fontSize:6}}>demo▶</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Dome */}
+        <div style={{padding:'6px 8px', borderBottom:'1px solid #111', background:'#050508', textAlign:'center'}}>
+          <div className="label teal" style={{fontSize:7, marginBottom:3}}>// TOUCH THE DOME</div>
+          <div className="box teal" style={{height:32, display:'flex', alignItems:'center', justifyContent:'center'}}>
+            <div style={{fontSize:8, color:'#4ecdc4'}}>voronoi canvas</div>
+          </div>
+        </div>
+
+        {/* Skills */}
+        <div style={{background:'#060606', padding:'8px', borderBottom:'1px solid #111', position:'relative', overflow:'hidden'}}>
+          <PetrovaArc/>
+          <div className="label pink" style={{fontSize:7, marginBottom:4}}>02 // ASTROPHAGE</div>
+          {[
+            {cat:'LANG', items:['Python','TS','C++']},
+            {cat:'WEB', items:['React','Next.js']},
+            {cat:'AI', items:['TF.js','Gemini']},
+          ].map(row=>(
+            <div key={row.cat} style={{display:'flex', gap:4, marginBottom:3, alignItems:'center'}}>
+              <div className="label" style={{width:26, fontSize:6}}>{row.cat}</div>
+              <div>{row.items.map(i=><span key={i} className="pill" style={{fontSize:6}}>{i}</span>)}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Timeline */}
+        <div style={{padding:'8px', background:'#050508', borderBottom:'1px solid #111'}}>
+          <div className="label amber" style={{fontSize:7, marginBottom:5}}>03 // MISSION LOG</div>
+          <TimelineNode title="Tutor" sub="Columbia Intl" date="2025–" tags={['100+ students']}/>
+          <TimelineNode title="Project Lead" sub="Ripen Labs" date="2025" tags={['+30% reach']}/>
+          <TimelineNode title="Software Dev" sub="Sumobots" date="2024–25" tags={['Embedded C++']} last/>
+        </div>
+
+        {/* Contact */}
+        <div style={{padding:'10px', background:'#050508', textAlign:'center'}}>
+          <div className="h2" style={{fontSize:13, marginBottom:6}}>TRANSMIT A SIGNAL</div>
+          <div style={{display:'flex', gap:4, justifyContent:'center', flexWrap:'wrap', marginBottom:6}}>
+            <div className="btn sm fill" style={{fontSize:7}}>✉ Email</div>
+            <div className="btn sm" style={{fontSize:7}}>GitHub</div>
+            <div className="btn sm" style={{fontSize:7}}>LinkedIn</div>
+          </div>
+          <div className="label" style={{fontSize:6}}>// hamilton ON · 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div className="scroll-hint">↑ fixed sidebar · right panel scrolls · nav always visible ↑</div>
+  </div>
+);
+
+/* ─── Main canvas ─── */
+const App = () => (
+  <>
+    <div style={{padding:'20px 32px 8px', fontFamily:'Space Mono, monospace'}}>
+      <div style={{fontSize:13, color:'#f0b429', letterSpacing:'0.15em', marginBottom:3}}>GB_ PORTFOLIO — WIREFRAME DIRECTIONS</div>
+      <div style={{fontSize:9, color:'#555', marginBottom:2}}>4 layout approaches · choose elements to mix · scroll within artboards to see all sections</div>
+    </div>
+    <DesignCanvas>
+      <DCSection id="directions" title="Layout Directions">
+        <DCArtboard id="dir-a" label="A · Mission Control" width={420} height={980}>
+          <DirectionA/>
+        </DCArtboard>
+        <DCArtboard id="dir-b" label="B · Deep Space Cinema" width={420} height={980}>
+          <DirectionB/>
+        </DCArtboard>
+        <DCArtboard id="dir-c" label="C · Terminal Log" width={420} height={980}>
+          <DirectionC/>
+        </DCArtboard>
+        <DCArtboard id="dir-d" label="D · Orbital Split" width={420} height={980}>
+          <DirectionD/>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="details" title="Section Details">
+        <DCArtboard id="hero-variants" label="Hero Variants" width={560} height={320}>
+          <div style={{background:'#0e0e0e', width:'100%', height:'100%', display:'flex', gap:0, fontFamily:'Caveat, cursive', overflow:'hidden'}}>
+            {/* Hero A — rocky left, text right */}
+            <div style={{flex:1, background:'#050508', padding:'12px', position:'relative', borderRight:'1px solid #1a1a1a', overflow:'hidden'}}>
+              <Stars n={30}/>
+              <div style={{fontFamily:'Space Mono', fontSize:8, color:'#c8791a', marginBottom:4}}>HERO VAR. 1</div>
+              <div style={{display:'flex', gap:8, alignItems:'center'}}>
+                <div style={{width:50, height:70, border:'1.5px solid #c8791a', background:'repeating-linear-gradient(45deg,#1a1a1a 0,#1a1a1a 2px,transparent 0,transparent 8px)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0}}>
+                  <div style={{fontFamily:'Space Mono', fontSize:6, color:'#c8791a', textAlign:'center'}}>ROCKY<br/>left</div>
+                </div>
+                <div>
+                  <div style={{color:'#f0b429', fontSize:16, fontWeight:700}}>GAGAN<br/>BHATTARAI</div>
+                  <div style={{fontFamily:'Space Mono', fontSize:7, color:'#4ecdc4', marginTop:2}}>CS @ McMaster</div>
+                  <div style={{display:'flex', gap:4, marginTop:6}}>
+                    <div style={{border:'1px solid #c8791a', borderRadius:2, padding:'2px 6px', fontSize:8, color:'#c8791a', fontFamily:'Space Mono'}}>▶ PROJECTS</div>
+                    <div style={{border:'1px solid #444', borderRadius:2, padding:'2px 6px', fontSize:8, color:'#666', fontFamily:'Space Mono'}}>github↗</div>
+                  </div>
+                </div>
+              </div>
+              <div style={{fontFamily:'Space Mono', fontSize:7, color:'#c8791a', textAlign:'center', position:'absolute', bottom:8, left:0, right:0, opacity:0.6}}>↓</div>
+            </div>
+            {/* Hero B — centered stacked */}
+            <div style={{flex:1, background:'#050508', padding:'12px', position:'relative', borderRight:'1px solid #1a1a1a', textAlign:'center', overflow:'hidden'}}>
+              <Stars n={30}/>
+              <div style={{fontFamily:'Space Mono', fontSize:8, color:'#c8791a', marginBottom:4}}>HERO VAR. 2</div>
+              <div style={{width:55, height:75, border:'1.5px solid #c8791a', background:'repeating-linear-gradient(45deg,#1a1a1a 0,#1a1a1a 2px,transparent 0,transparent 8px)', margin:'0 auto 8px', display:'flex', alignItems:'center', justifyContent:'center'}}>
+                <div style={{fontFamily:'Space Mono', fontSize:6, color:'#c8791a'}}>ROCKY<br/>center</div>
+              </div>
+              <div style={{color:'#f0b429', fontSize:14, fontWeight:700}}>GAGAN BHATTARAI</div>
+              <div style={{fontFamily:'Space Mono', fontSize:7, color:'#4ecdc4', marginTop:2, marginBottom:6}}>CS @ McMaster</div>
+              <div style={{display:'flex', gap:4, justifyContent:'center'}}>
+                <div style={{border:'1px solid #c8791a', background:'rgba(200,121,26,0.2)', borderRadius:2, padding:'2px 8px', fontSize:8, color:'#c8791a', fontFamily:'Space Mono'}}>▶ PROJECTS</div>
+                <div style={{border:'1px solid #444', borderRadius:2, padding:'2px 8px', fontSize:8, color:'#666', fontFamily:'Space Mono'}}>github↗</div>
+              </div>
+            </div>
+            {/* Hero C — full-bleed rocky behind text */}
+            <div style={{flex:1, background:'#050508', padding:'12px', position:'relative', overflow:'hidden'}}>
+              <Stars n={30}/>
+              <div style={{fontFamily:'Space Mono', fontSize:8, color:'#c8791a', marginBottom:4}}>HERO VAR. 3</div>
+              {/* big faint rocky behind */}
+              <div style={{position:'absolute', right:-10, top:20, width:90, height:110, border:'1.5px dashed #c8791a', opacity:0.2, background:'repeating-linear-gradient(45deg,#1a1a1a 0,#1a1a1a 2px,transparent 0,transparent 8px)'}}/>
+              <div style={{position:'relative', zIndex:1}}>
+                <div style={{fontFamily:'Space Mono', fontSize:7, color:'#555', marginBottom:3}}>// YEAR 3 · McMASTER</div>
+                <div style={{color:'#f0b429', fontSize:20, fontWeight:700, lineHeight:1}}>GAGAN<br/>BHATTARAI</div>
+                <div style={{height:2, width:30, background:'#c8791a', margin:'6px 0'}}/>
+                <div style={{fontFamily:'Space Mono', fontSize:7, color:'#4ecdc4', marginBottom:8}}>Full-Stack · AI · Embedded</div>
+                <div style={{border:'1px solid #c8791a', background:'rgba(200,121,26,0.25)', borderRadius:2, padding:'2px 8px', fontSize:8, color:'#c8791a', fontFamily:'Space Mono', display:'inline-block'}}>▶ VIEW PROJECTS</div>
+              </div>
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="project-cards" label="Project Card Variants" width={480} height={280}>
+          <div style={{background:'#0e0e0e', width:'100%', height:'100%', fontFamily:'Caveat, cursive', padding:'12px', display:'flex', flexDirection:'column', gap:8}}>
+            <div style={{fontFamily:'Space Mono', fontSize:8, color:'#c8791a', marginBottom:2}}>PROJECT CARD STYLES</div>
+            <div style={{display:'flex', gap:8, flex:1}}>
+              {/* Style 1 — glass panel */}
+              <div style={{flex:1, border:'1px solid #4ecdc4', borderRadius:3, background:'rgba(200,230,255,0.04)', padding:'8px 10px', display:'flex', flexDirection:'column'}}>
+                <div style={{fontFamily:'Space Mono', fontSize:7, color:'#444', marginBottom:2}}>project_01 // glass</div>
+                <div style={{color:'#f0b429', fontSize:14, fontWeight:600, marginBottom:2}}>Thru.ai</div>
+                <div style={{color:'#888', fontSize:10, marginBottom:6, flex:1}}>AI drive-thru ordering with ElevenLabs voice AI + real-time sync</div>
+                <div style={{marginBottom:5}}><span style={{border:'1px solid #c8791a', borderRadius:10, padding:'1px 5px', fontSize:7, color:'#c8791a', fontFamily:'Space Mono', marginRight:2}}>React</span><span style={{border:'1px solid #c8791a', borderRadius:10, padding:'1px 5px', fontSize:7, color:'#c8791a', fontFamily:'Space Mono'}}>TF.js</span></div>
+                <div style={{display:'flex', gap:4, borderTop:'1px solid #1a1a1a', paddingTop:5}}>
+                  <div style={{border:'1px solid #333', borderRadius:2, padding:'1px 6px', fontSize:7, fontFamily:'Space Mono', color:'#666'}}>github↗</div>
+                  <div style={{border:'1px solid #c8791a', background:'rgba(200,121,26,0.2)', borderRadius:2, padding:'1px 6px', fontSize:7, fontFamily:'Space Mono', color:'#c8791a'}}>demo▶</div>
+                </div>
+              </div>
+              {/* Style 2 — amber border top accent */}
+              <div style={{flex:1, border:'1px solid #222', borderTop:'3px solid #c8791a', borderRadius:3, background:'#0a0a0a', padding:'8px 10px', display:'flex', flexDirection:'column'}}>
+                <div style={{fontFamily:'Space Mono', fontSize:7, color:'#444', marginBottom:2}}>project_02 // accent</div>
+                <div style={{color:'#f0b429', fontSize:14, fontWeight:600, marginBottom:2}}>Big City</div>
+                <div style={{color:'#888', fontSize:10, marginBottom:6, flex:1}}>Maps platform with 1000+ POIs + Gemini recommendations</div>
+                <div style={{marginBottom:5}}><span style={{border:'1px solid #c8791a', borderRadius:10, padding:'1px 5px', fontSize:7, color:'#c8791a', fontFamily:'Space Mono', marginRight:2}}>Next.js</span><span style={{border:'1px solid #c8791a', borderRadius:10, padding:'1px 5px', fontSize:7, color:'#c8791a', fontFamily:'Space Mono'}}>Gemini</span></div>
+                <div style={{display:'flex', gap:4, borderTop:'1px solid #1a1a1a', paddingTop:5}}>
+                  <div style={{border:'1px solid #333', borderRadius:2, padding:'1px 6px', fontSize:7, fontFamily:'Space Mono', color:'#666'}}>github↗</div>
+                  <div style={{border:'1px solid #333', borderRadius:2, padding:'1px 6px', fontSize:7, fontFamily:'Space Mono', color:'#666'}}>devpost↗</div>
+                </div>
+              </div>
+              {/* Style 3 — terminal style */}
+              <div style={{flex:1, border:'1px solid #333', borderRadius:2, background:'#060606', padding:'8px 10px', display:'flex', flexDirection:'column', fontFamily:'Space Mono'}}>
+                <div style={{fontSize:7, color:'#555', marginBottom:3}}>$ cat thru_ai.md</div>
+                <div style={{color:'#f0b429', fontSize:12, fontWeight:700, marginBottom:2}}>THRU.AI</div>
+                <div style={{color:'#666', fontSize:8, marginBottom:4, flex:1, lineHeight:1.5}}>AI ordering · voice STT/TTS · real-time sync</div>
+                <div style={{color:'#c8791a', fontSize:8, marginBottom:3}}>stack: React, TF.js, ElevenLabs, SQLite</div>
+                <div style={{display:'flex', gap:4}}>
+                  <div style={{border:'1px solid #c8791a', padding:'1px 6px', fontSize:7, color:'#c8791a'}}>↗ github</div>
+                  <div style={{border:'1px solid #c8791a', background:'rgba(200,121,26,0.2)', padding:'1px 6px', fontSize:7, color:'#c8791a'}}>▶ demo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="nav-variants" label="Header / Nav Variants" width={560} height={200}>
+          <div style={{background:'#0e0e0e', width:'100%', height:'100%', fontFamily:'Caveat, cursive', padding:'12px', display:'flex', flexDirection:'column', gap:10}}>
+            <div style={{fontFamily:'Space Mono', fontSize:8, color:'#c8791a', marginBottom:2}}>HEADER VARIANTS</div>
+            {/* Nav A — full */}
+            <div style={{border:'1px solid #222', borderRadius:3, padding:'6px 12px', display:'flex', alignItems:'center', justifyContent:'space-between', background:'rgba(5,5,8,0.8)', position:'relative', overflow:'hidden'}}>
+              <div style={{position:'absolute', inset:0, backdropFilter:'blur(12px)', background:'rgba(5,5,8,0.7)'}}/>
+              <div style={{fontFamily:'Space Mono', color:'#f0b429', fontWeight:700, fontSize:12, zIndex:1}}>GB_</div>
+              <div style={{display:'flex', gap:12, zIndex:1}}>
+                {['PROJECTS','EXPERIENCE','SKILLS','CONTACT'].map(l=>
+                  <div key={l} style={{fontFamily:'Space Mono', fontSize:7, color:'#888', letterSpacing:'0.08em'}}>{l}</div>
+                )}
+              </div>
+              <div style={{border:'1px solid #c8791a', borderRadius:2, padding:'3px 8px', fontSize:8, color:'#c8791a', fontFamily:'Space Mono', zIndex:1}}>TRANSMIT SIGNAL</div>
+              <div style={{position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(90deg,transparent,#c8791a,transparent)', opacity:0.6}}/>
+            </div>
+            {/* Nav B — minimal pill */}
+            <div style={{border:'1px solid #1a1a1a', borderRadius:20, padding:'5px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', background:'rgba(10,10,10,0.9)'}}>
+              <div style={{fontFamily:'Space Mono', color:'#f0b429', fontWeight:700, fontSize:12}}>GB_</div>
+              <div style={{display:'flex', gap:1, background:'#0a0a0a', border:'1px solid #1a1a1a', borderRadius:20, padding:'2px 3px'}}>
+                {['PROJECTS','SKILLS','LOG','CONTACT'].map(l=>
+                  <div key={l} style={{fontFamily:'Space Mono', fontSize:7, color:'#555', padding:'2px 7px', borderRadius:20, letterSpacing:'0.05em'}}>{l}</div>
+                )}
+              </div>
+              <div style={{width:7, height:7, border:'1px solid #c8791a', borderRadius:'50%', background:'rgba(200,121,26,0.3)'}}/>
+            </div>
+            {/* Nav C — left logo only + right signal */}
+            <div style={{border:'1px solid #1a1a1a', padding:'5px 12px', display:'flex', alignItems:'center', justifyContent:'space-between', background:'#050508', borderBottom:'1px solid #c8791a', borderTop:'none', borderLeft:'none', borderRight:'none'}}>
+              <div style={{display:'flex', gap:8, alignItems:'center'}}>
+                <div style={{fontFamily:'Space Mono', color:'#f0b429', fontWeight:700, fontSize:12}}>GB_</div>
+                <div style={{fontFamily:'Space Mono', fontSize:7, color:'#333'}}>·</div>
+                <div style={{fontFamily:'Space Mono', fontSize:7, color:'#555', letterSpacing:'0.1em'}}>GAGAN BHATTARAI</div>
+              </div>
+              <div style={{display:'flex', gap:8}}>
+                <div style={{fontFamily:'Space Mono', fontSize:7, color:'#555'}}>↑ scroll up</div>
+                <div style={{border:'1px solid #c8791a', background:'rgba(200,121,26,0.2)', borderRadius:2, padding:'2px 8px', fontSize:7, color:'#c8791a', fontFamily:'Space Mono'}}>SIGNAL ▶</div>
+              </div>
+            </div>
+          </div>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  </>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
