@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ScaleTrack Case Study | Gagan Bhattarai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --void:#050508; --amber:#c8791a; --gold:#f0b429; --text:#e8dcc8; --sonar:#4ecdc4; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--void); color:var(--text); font-family:'IBM Plex Mono', monospace; line-height:1.7; }
+    a { color:inherit; }
+    .shell { width:min(920px, calc(100% - 40px)); margin:auto; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:24px 0; border-bottom:1px solid rgba(200,121,26,.2); }
+    .logo, h1, h2 { font-family:Orbitron, sans-serif; }
+    .logo { color:var(--gold); text-decoration:none; font-weight:900; letter-spacing:.08em; }
+    .back { color:var(--amber); font-size:.7rem; letter-spacing:.08em; text-decoration:none; }
+    main { padding:88px 0 96px; }
+    .eyebrow { color:var(--sonar); letter-spacing:.2em; font-size:.66rem; }
+    h1 { color:var(--gold); font-size:clamp(2.2rem, 7vw, 4.8rem); line-height:1; margin:16px 0 22px; }
+    .lede { max-width:690px; color:rgba(232,220,200,.78); font-size:1rem; }
+    .facts { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:48px 0 72px; }
+    .fact { padding:18px; border:1px solid rgba(200,121,26,.35); background:rgba(200,121,26,.06); }
+    .fact strong { display:block; color:var(--gold); font-family:Orbitron,sans-serif; font-size:.84rem; margin-bottom:6px; }
+    .fact span { color:rgba(232,220,200,.62); font-size:.68rem; line-height:1.6; display:block; }
+    .section { border-top:1px solid rgba(232,220,200,.11); padding:36px 0; display:grid; grid-template-columns:190px 1fr; gap:32px; }
+    h2 { font-size:.78rem; letter-spacing:.15em; color:var(--amber); margin:6px 0; }
+    .section p { margin:0; color:rgba(232,220,200,.8); }
+    .steps { display:grid; gap:12px; }
+    .step { padding:16px 18px; border-left:2px solid var(--amber); background:rgba(255,255,255,.025); }
+    .step b { color:var(--gold); }
+    .tech { display:flex; flex-wrap:wrap; gap:8px; }
+    .tech span { color:var(--text); border:1px solid rgba(200,121,26,.45); border-radius:999px; padding:4px 12px; font-size:.68rem; }
+    .cta { margin-top:40px; padding:24px; border:1px solid rgba(240,180,41,.45); background:rgba(200,121,26,.08); }
+    .cta a { color:var(--gold); }
+    footer { padding:24px 0; color:#5e5547; font-size:.62rem; letter-spacing:.12em; border-top:1px solid rgba(232,220,200,.08); }
+    @media (max-width:650px) { .facts { grid-template-columns:1fr; } .section { grid-template-columns:1fr; gap:8px; } main { padding-top:56px; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="logo" href="portfolio.html">GB_</a>
+      <a class="back" href="portfolio.html#projects">← ALL PROJECTS</a>
+    </header>
+    <main>
+      <p class="eyebrow">CASE STUDY // 2026</p>
+      <h1>ScaleTrack</h1>
+      <p class="lede">A local-first iPhone weight tracker built to make daily logging fast while keeping the core experience useful without an account or a remote backend.</p>
+
+      <div class="facts">
+        <div class="fact"><strong>SwiftUI + SwiftData</strong><span>Native interface and local data model for the core tracking workflow.</span></div>
+        <div class="fact"><strong>Vision OCR</strong><span>Optional photo-based entry that reads a scale display and lets the user confirm the result.</span></div>
+        <div class="fact"><strong>HealthKit</strong><span>Optional synchronization that extends the app without becoming a requirement.</span></div>
+      </div>
+
+      <section class="section">
+        <h2>THE PROBLEM</h2>
+        <p>Weight tracking should not require an account, a subscription, or a slow multi-step workflow. ScaleTrack focuses on the core job: recording a weigh-in, understanding a trend, and staying aware of progress toward a goal.</p>
+      </section>
+
+      <section class="section">
+        <h2>THE BUILD</h2>
+        <div class="steps">
+          <div class="step"><b>Record.</b> Users can add a weight manually or begin from a photo of a scale display.</div>
+          <div class="step"><b>Understand.</b> Locally stored history drives trends, goals, progress photos, and export.</div>
+          <div class="step"><b>Extend by choice.</b> Vision OCR and HealthKit are optional input and sync paths, not dependencies for daily tracking.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>DESIGN CHOICE</h2>
+        <p>The most important decision was local-first design. The app remains useful with no account and no separate service. That keeps the primary workflow direct and makes external integrations deliberate opt-in enhancements rather than points of failure.</p>
+      </section>
+
+      <section class="section">
+        <h2>STACK</h2>
+        <div class="tech"><span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>Apple Vision</span><span>HealthKit</span><span>iOS</span></div>
+      </section>
+
+      <div class="cta">Want the detailed privacy model? Read the <a href="privacy.html">ScaleTrack privacy policy</a>.</div>
+    </main>
+    <footer>// GAGAN BHATTARAI · SCALETRACK CASE STUDY</footer>
+  </div>
+</body>
+</html>

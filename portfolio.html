@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gagan Bhattarai — GB_</title>
+<title>Gagan Bhattarai — Software Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -283,6 +283,18 @@ nav a:hover { opacity: 1; color: var(--amber); }
 .plink.demo {
   background: rgba(200,121,26,.14); border-color: var(--amber); color: var(--amber);
 }
+.proj-card.featured {
+  grid-column: 1 / -1;
+  order: -1;
+  border-color: rgba(240,180,41,.55);
+  background: linear-gradient(120deg, rgba(200,121,26,.12), #060606 58%);
+}
+.featured-layout { display: grid; grid-template-columns: 1.35fr .65fr; gap: 28px; align-items: end; }
+.featured-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.proof-item { border-left: 1px solid rgba(240,180,41,.5); padding: 4px 0 4px 12px; }
+.proof-num { display: block; color: var(--gold); font-family: 'Orbitron', sans-serif; font-size: .92rem; }
+.proof-lbl { display: block; color: rgba(232,220,200,.55); font-size: .58rem; line-height: 1.5; margin-top: 4px; }
+.hero-status { margin: 14px 0 26px; color: rgba(232,220,200,.55); font-size: .67rem; letter-spacing: .06em; }
 
 /* ════ DOME ════ */
 #dome {
@@ -468,12 +480,19 @@ footer {
 
   #projects { padding: 90px 20px; }
   .proj-grid { grid-template-columns: 1fr; }
+  .proj-card.featured { grid-column: auto; }
+  .featured-layout { grid-template-columns: 1fr; }
   #skills { padding: 90px 20px; }
   .skills-grid { grid-template-columns: 1fr; }
   #experience { padding: 90px 20px; }
   #contact { padding: 90px 20px 70px; }
 
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  video { display: none; }
 }
 </style>
 </head>
@@ -507,13 +526,14 @@ footer {
   <div class="hero-bg-rocky" aria-hidden="true"><video src="uploadsVid/rockyHeroVid.webm" autoplay loop muted playsinline></video></div>
   <div class="hero-in">
     <h1 class="hero-name reveal" style="transition-delay:.1s">GAGAN BHATTARAI</h1>
-    <p class="hero-sub" aria-label="CS at McMaster — Full Stack — AI — Embedded">
+    <p class="hero-sub" aria-label="Computer Science at McMaster — Software Developer — iOS and Full Stack">
       <span id="tw"></span><span class="cursor-blink"> </span>
     </p>
     <div class="hero-btns reveal" style="transition-delay:.2s">
       <a href="#projects" class="btn-fill" aria-label="View my projects">▶ VIEW PROJECTS</a>
       <a href="https://github.com/swagbit1" target="_blank" rel="noopener" class="btn-ghost" aria-label="GitHub profile — opens in new tab">github ↗</a>
     </div>
+    <p class="hero-status reveal" style="transition-delay:.3s">Currently building local-first iOS and full-stack products.</p>
   </div>
   <div class="chevron" aria-hidden="true">↓</div>
 </section>
@@ -540,7 +560,7 @@ footer {
     <!-- TR: Education -->
     <div class="q-card q-tr rr" aria-label="Education">
       <h3>EDUCATION</h3>
-      <p class="q-body">McMaster University<br>BASc Computer Science<br>Minor Mathematics<br><span style="color:var(--sonar);font-size:.65rem;">Expected Apr 2028 · Hamilton, ON</span></p>
+      <p class="q-body">McMaster University<br>Honours B.A.Sc. Computer Science (Co-op)<br>Minor in Mathematics<br><span style="color:var(--sonar);font-size:.65rem;">Expected Apr 2028 · Hamilton, ON</span></p>
     </div>
 
 
@@ -548,7 +568,7 @@ footer {
     <!-- BL: About -->
     <div class="q-card q-bl rl" style="transition-delay:.1s" aria-label="About Gagan">
       <h3>ABOUT</h3>
-      <p class="q-body">Year 3 CS student. Tutor. Team lead. Habitual over-engineer.<br><br>Currently: building things that probably shouldn't exist.</p>
+      <p class="q-body">Computer Science co-op student and builder of local-first mobile and full-stack products.<br><br>Currently: shipping practical software with thoughtful user workflows.</p>
     </div>
 
     <!-- BR: Stack -->
@@ -558,11 +578,12 @@ footer {
       <span class="pill t">Next.js</span>
       <span class="pill t">Node.js</span>
       <span class="pill t">Python</span>
-      <span class="pill t">TensorFlow.js</span>
+      <span class="pill t">SwiftUI</span>
+      <span class="pill t">SwiftData</span>
       <span class="pill t">scikit-learn</span>
-      <span class="pill t">C++</span>
-      <span class="pill t">Docker</span>
-      <span class="pill t">Arduino</span>
+      <span class="pill t">PostgreSQL</span>
+      <span class="pill t">Swift</span>
+      <span class="pill t">Vision OCR</span>
     </div>
   </div>
 </section>
@@ -573,49 +594,92 @@ footer {
     <p class="sec-label">01 // TRANSMITTED WORKS</p>
     <div class="proj-grid">
 
-      <article class="proj-card reveal" aria-label="Thru.ai — AI powered drive-through">
+      <article class="proj-card reveal" aria-label="Verdict — startup idea evaluation product">
         <div class="proj-sheen" aria-hidden="true"></div>
         <div class="proj-top">
-          <span class="proj-hash">a3f9c2b</span>
-          <span class="proj-date-lbl">2025-01</span>
+          <span class="proj-hash">v3rd1ct</span>
+          <span class="proj-date-lbl">2026-06</span>
         </div>
-        <h2 class="proj-title">Thru.ai</h2>
-        <p class="proj-cmd"><span class="c">$ </span>cat thru_ai.md<span class="c"> —</span> AI-Powered Drive-Thru</p>
-        <p class="proj-desc">Full-stack AI ordering system with ElevenLabs Conversational AI for voice ordering (STT, LLM intent parsing, TTS). Real-time sync via Socket.IO. In-browser person detection with TensorFlow.js.</p>
+        <h2 class="proj-title">Verdict</h2>
+        <p class="proj-cmd"><span class="c">$ </span>cat verdict.md<span class="c"> —</span> Startup Idea Evaluation</p>
+        <p class="proj-desc">Full-stack application that turns structured startup ideas into evidence-cited Build, Pivot, or Kill reports. Streams progress to the browser while persisting results in PostgreSQL.</p>
         <div class="proj-tags">
           <span class="pill">React</span>
           <span class="pill">Node.js</span>
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">Anthropic API</span>
+          <span class="pill">Stripe</span>
+          <span class="pill">Vitest</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/swagbit1/Verdict" target="_blank" rel="noopener" class="plink" aria-label="Verdict GitHub repository">github ↗</a>
+        </div>
+      </article>
+
+      <article class="proj-card reveal" style="transition-delay:.15s" aria-label="Thru.ai — voice-ordering drive-through MVP">
+        <div class="proj-sheen" aria-hidden="true"></div>
+        <div class="proj-top">
+          <span class="proj-hash">thru4i</span>
+          <span class="proj-date-lbl">2026-01</span>
+        </div>
+        <h2 class="proj-title">Thru.ai</h2>
+        <p class="proj-cmd"><span class="c">$ </span>cat thru_ai.md<span class="c"> —</span> Voice-Ordering MVP</p>
+        <p class="proj-desc">Built the Node.js and React foundation for a kiosk-to-kitchen voice-ordering MVP at Mac-a-thon 2026. Connected ElevenLabs through Express and synchronized order changes with Socket.IO.</p>
+        <div class="proj-tags">
+          <span class="pill">React</span>
+          <span class="pill">Node.js</span>
+          <span class="pill">Express</span>
           <span class="pill">Socket.IO</span>
-          <span class="pill">TensorFlow.js</span>
-          <span class="pill">SQLite</span>
           <span class="pill">ElevenLabs</span>
         </div>
         <div class="proj-links">
           <a href="https://github.com/Erunixz/thru.io" target="_blank" rel="noopener" class="plink" aria-label="Thru.ai GitHub repository">github ↗</a>
           <a href="https://devpost.com/software/thru-ai" target="_blank" rel="noopener" class="plink" aria-label="Thru.ai Devpost page">devpost ↗</a>
-          <a href="https://www.youtube.com/watch?v=2kOjhEpz32I&t=1s" target="_blank" rel="noopener" class="plink demo" aria-label="Thru.ai demo video">demo ▶</a>
         </div>
       </article>
 
-      <article class="proj-card reveal" style="transition-delay:.15s" aria-label="Big City — Location discovery platform">
+      <article class="proj-card featured reveal" aria-label="ScaleTrack — native iPhone weight tracker">
+        <div class="proj-sheen" aria-hidden="true"></div>
+        <div class="featured-layout">
+          <div>
+            <div class="proj-top">
+              <span class="proj-hash">featured // sc4l3</span>
+              <span class="proj-date-lbl">2026 — PRESENT</span>
+            </div>
+            <h2 class="proj-title">ScaleTrack</h2>
+            <p class="proj-cmd"><span class="c">$ </span>cat scaletrack.md<span class="c"> —</span> Local-First iPhone App</p>
+            <p class="proj-desc">Native iPhone weight tracker designed around private, fast daily logging. Built local trends, goals, progress photos, export, photo-based entry with Vision OCR, and optional HealthKit synchronization.</p>
+            <div class="proj-tags">
+              <span class="pill">Swift</span><span class="pill">SwiftUI</span><span class="pill">SwiftData</span><span class="pill">Vision OCR</span><span class="pill">HealthKit</span>
+            </div>
+            <div class="proj-links">
+              <a href="scaletrack.html" class="plink demo" aria-label="Read the ScaleTrack case study">case study →</a>
+              <a href="privacy.html" class="plink" aria-label="Read ScaleTrack privacy policy">privacy policy →</a>
+            </div>
+          </div>
+          <div class="featured-proof" aria-label="ScaleTrack proof points">
+            <div class="proof-item"><span class="proof-num">Local-first</span><span class="proof-lbl">Core tracking works without an account or backend.</span></div>
+            <div class="proof-item"><span class="proof-num">Vision OCR</span><span class="proof-lbl">Photo-based weight entry with user confirmation.</span></div>
+            <div class="proof-item"><span class="proof-num">HealthKit</span><span class="proof-lbl">Optional Apple Health synchronization.</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj-card reveal" style="transition-delay:.15s" aria-label="Student Performance Predictor — machine learning project">
         <div class="proj-sheen" aria-hidden="true"></div>
         <div class="proj-top">
-          <span class="proj-hash">7e1d4a0</span>
-          <span class="proj-date-lbl">2025-02</span>
+          <span class="proj-hash">ml86k</span>
+          <span class="proj-date-lbl">2026-04</span>
         </div>
-        <h2 class="proj-title">Big City</h2>
-        <p class="proj-cmd"><span class="c">$ </span>cat big_city.md<span class="c"> —</span> Location Discovery Platform</p>
-        <p class="proj-desc">Scalable maps platform with Google Maps API and marker clustering (1000+ POIs). Convex real-time backend. Gemini 1.5 API for context-aware ranked recommendations. End-to-end TypeScript.</p>
+        <h2 class="proj-title">Student Performance Predictor</h2>
+        <p class="proj-cmd"><span class="c">$ </span>cat student_predictor.md<span class="c"> —</span> Grade Classification</p>
+        <p class="proj-desc">Cleaned 86K records from three datasets and compared Logistic Regression with a 173,964-parameter TensorFlow network across 12 grade categories; improved weighted F1 from 0.619 to 0.648.</p>
         <div class="proj-tags">
-          <span class="pill">Next.js</span>
-          <span class="pill">TypeScript</span>
-          <span class="pill">Convex</span>
-          <span class="pill">Gemini API</span>
-          <span class="pill">Google Maps API</span>
-        </div>
-        <div class="proj-links">
-          <a href="https://github.com/akashngb/big-city" target="_blank" rel="noopener" class="plink" aria-label="Big City GitHub repository">github ↗</a>
-          <a href="https://devpost.com/software/big-city" target="_blank" rel="noopener" class="plink" aria-label="Big City Devpost page">devpost ↗</a>
+          <span class="pill">Python</span>
+          <span class="pill">TensorFlow</span>
+          <span class="pill">scikit-learn</span>
+          <span class="pill">pandas</span>
+          <span class="pill">NumPy</span>
         </div>
       </article>
 
@@ -647,19 +711,19 @@ footer {
         <h3>WEB</h3>
         <span class="sk-pill">React</span><span class="sk-pill">Next.js</span>
         <span class="sk-pill">Node.js</span><span class="sk-pill">Express</span>
-        <span class="sk-pill">Socket.IO</span><span class="sk-pill">Tailwind</span>
+        <span class="sk-pill">Socket.IO</span><span class="sk-pill">PostgreSQL</span>
       </div>
       <div class="skill-group reveal" style="transition-delay:.16s">
         <h3>AI / ML</h3>
-        <span class="sk-pill">TensorFlow.js</span><span class="sk-pill">scikit-learn</span>
+        <span class="sk-pill">TensorFlow</span><span class="sk-pill">scikit-learn</span>
         <span class="sk-pill">NumPy</span><span class="sk-pill">pandas</span>
-        <span class="sk-pill">Gemini API</span><span class="sk-pill">ElevenLabs</span>
+        <span class="sk-pill">Anthropic API</span><span class="sk-pill">ElevenLabs</span>
       </div>
       <div class="skill-group reveal" style="transition-delay:.24s">
         <h3>TOOLS</h3>
-        <span class="sk-pill">Git</span><span class="sk-pill">Docker</span>
-        <span class="sk-pill">Arduino</span><span class="sk-pill">I2C/SPI</span>
-        <span class="sk-pill">PWM</span><span class="sk-pill">Linux/Unix</span>
+        <span class="sk-pill">Swift</span><span class="sk-pill">SwiftUI</span>
+        <span class="sk-pill">SwiftData</span><span class="sk-pill">Git</span>
+        <span class="sk-pill">Vitest</span><span class="sk-pill">Vision OCR</span>
       </div>
     </div>
     <blockquote class="skills-quote reveal" style="transition-delay:.3s">
@@ -677,12 +741,12 @@ footer {
 
       <div class="t-entry rr" aria-label="Software Developer role">
         <div class="t-dot" aria-hidden="true"></div>
-        <p class="t-when">SEPT 2024 — APR 2025</p>
+        <p class="t-when">MAY 2026 — PRESENT</p>
         <h3 class="t-role">Software Developer</h3>
-        <p class="t-org">McMaster Sumobots</p>
+        <p class="t-org">ScaleTrack · Independent · Hamilton, ON</p>
         <ul class="t-notes">
-          <li>Embedded C++ on Arduino Nano, PID control loop, +20% movement accuracy</li>
-          <li>Debugged I2C comms and PWM under competition constraints</li>
+          <li>Shipped a native iPhone weight-tracking app with SwiftUI and SwiftData, including local-first logging, trends, goals, photos, and export</li>
+          <li>Integrated Vision OCR for photo-based entries and optional HealthKit synchronization; published on the Apple App Store</li>
         </ul>
       </div>
 
@@ -690,21 +754,21 @@ footer {
         <div class="t-dot" aria-hidden="true"></div>
         <p class="t-when">MAR 2026</p>
         <h3 class="t-role">Project Lead</h3>
-        <p class="t-org">2nd Nature Safety Consulting / Ripen Labs</p>
+        <p class="t-org">2nd Nature Safety Consulting / Riipen Labs · Hamilton, ON</p>
         <ul class="t-notes">
           <li>Led cross-functional team of 5 on customer acquisition strategy</li>
-          <li>Delivered growth strategy projected at +30% client reach on 2-week deadline</li>
+          <li>Delivered a strategy projected to increase client reach by 30% within a 2-week deadline</li>
         </ul>
       </div>
 
       <div class="t-entry rr" style="transition-delay:.2s" aria-label="Math and CS Tutor role">
         <div class="t-dot" aria-hidden="true"></div>
         <p class="t-when">SEPT 2025 — PRESENT</p>
-        <h3 class="t-role">Math / CS Tutor</h3>
-        <p class="t-org">Columbia International College · Hamilton, ON</p>
+        <h3 class="t-role">CS / Math Tutor</h3>
+        <p class="t-org">CIC · Hamilton, ON</p>
         <ul class="t-notes">
-          <li>Tutored 100+ international students in Advanced Functions, Calculus, Data Management</li>
-          <li>Adapted teaching strategies for cross-cultural communication</li>
+          <li>Tutored 350+ international students in Grades 9–12 Advanced Functions, Calculus &amp; Vectors, and Data Management</li>
+          <li>Adapted individualized instruction to close knowledge gaps and build confidence across diverse international backgrounds</li>
         </ul>
       </div>
 
@@ -725,9 +789,9 @@ footer {
     "Rocky and Grace figured out how to communicate across species.<br>An email should be easier."
   </p>
   <div class="contact-links reveal" style="transition-delay:.16s">
-    <span class="clink primary">Contact details removed</span>
+    <a href="mailto:gagan.bhattarai25@gmail.com" class="clink primary" aria-label="Email Gagan Bhattarai">✉ Email</a>
     <a href="https://github.com/swagbit1" target="_blank" rel="noopener" class="clink" aria-label="GitHub profile">⌥ GitHub</a>
-    <a href="https://www.linkedin.com/in/gagan-bhattarai-42742b355/" target="_blank" rel="noopener" class="clink" aria-label="LinkedIn profile">↗ LinkedIn</a>
+    <a href="https://linkedin.com/in/gaganbhattarai" target="_blank" rel="noopener" class="clink" aria-label="LinkedIn profile">↗ LinkedIn</a>
 
   </div>
 
@@ -774,7 +838,7 @@ footer {
 
 /* ════ TYPEWRITER ════ */
 !function(){
-  const phrases = ['CS @ McMaster','Full-Stack Developer','AI Engineer','Embedded Systems'];
+  const phrases = ['CS @ McMaster','Software Developer','iOS Developer','Full-Stack Builder'];
   const el = document.getElementById('tw');
   let pi=0, ci=0, del=false;
   const tick = () => {
