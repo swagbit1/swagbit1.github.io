@@ -1,0 +1,8 @@
+/* Small animated characters occupy dedicated gaps, never the content columns. */
+.has-chase{position:relative;isolation:isolate;padding:0 35px 95px;overflow:clip;overflow-clip-margin:18px}
+.has-chase>h2{display:inline-block;margin-bottom:17px}
+.has-chase .project-link{margin:60px 0 0;padding-left:18px;padding-right:18px}
+.chase-art{position:absolute;top:0;left:0;overflow:visible;pointer-events:none;z-index:2}
+.chase-toggle{float:right;margin-top:44px;border:0;border-bottom:1px solid #596068;padding:0 0 2px;background:none;color:#a5abb1;font-family:inherit;font-size:12px;line-height:1.5;cursor:pointer}
+.chase-toggle:hover{color:#e8e8e8}.chase-toggle:focus-visible{outline:2px solid #9ecbff;outline-offset:5px}
+@media(max-width:540px){.has-chase{padding-left:15px;padding-right:15px}.chase-toggle{margin-top:45px;font-size:11px}}
